@@ -1,27 +1,29 @@
 services:
 - type: web
-  name: wordpress
+  name: wiki
   env: docker
   plan: standard
   autoDeploy: false
-  disk:
-    name: config
-    mountPath: /var/www/html
-    sizeGB: 20
   envVars:
-  - key: WORDPRESS_DB_HOST
+  - key: DB_TYPE
+    value: postgres
+  - key: DB_HOST
     fromDatabase:
       name: fujinninja-wordpress-postgres
       property: Hostname
-  - key: WORDPRESS_DB_NAME
+  - key: DB_PORT
+    fromDatabase:
+      name: fujinninja-wordpress-postgres
+      property: Port
+  - key: DB_NAME
     fromDatabase:
       name: fujinninja-wordpress-postgres
       property: Database
-  - key: WORDPRESS_DB_USER
+  - key: DB_USER
     fromDatabase:
       name: fujinninja-wordpress-postgres
       property: Username
-  - key: WORDPRESS_DB_PASSWORD
+  - key: DB_PASS
     fromDatabase:
       name: fujinninja-wordpress-postgres
       property: Password
