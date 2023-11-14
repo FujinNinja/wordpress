@@ -1,7 +1,9 @@
 services:
 - type: web
-  name: wiki
-  env: docker
+  name: wikijs
+  runtime: image
+  image:
+    url: ghcr.io/requarks/wiki:2
   plan: standard
   autoDeploy: false
   envVars:
@@ -9,22 +11,23 @@ services:
     value: postgres
   - key: DB_HOST
     fromDatabase:
-      name: fujinninja-wordpress-postgres
-      property: Hostname
+      name: wikijs-postgres
+      property: host
   - key: DB_PORT
     fromDatabase:
-      name: fujinninja-wordpress-postgres
-      property: Port
+      name: wikijs-postgres
+      property: port
   - key: DB_NAME
     fromDatabase:
-      name: fujinninja-wordpress-postgres
-      property: Database
+      name: wikijs-postgres
+      property: database
   - key: DB_USER
     fromDatabase:
-      name: fujinninja-wordpress-postgres
-      property: Username
+      name: wikijs-postgres
+      property: user
   - key: DB_PASS
     fromDatabase:
-      name: fujinninja-wordpress-postgres
-      property: Password
+      name: wikijs-postgres
+      property: password
+
 
